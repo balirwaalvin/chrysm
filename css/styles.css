@@ -243,22 +243,50 @@ p  { font-size: 1rem; line-height: 1.75; color: var(--text-muted); }
 /* ─── Hero Section ─── */
 #hero {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  position: relative;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+}
+/* Title band — clean, separate row above zones */
+.hero-top {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 140px 2rem 3rem;
+  background: linear-gradient(180deg, rgba(13,1,24,1) 0%, rgba(13,1,24,0.85) 70%, transparent 100%);
+}
+.hero-top h1 {
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+}
+.hero-top p {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.6);
+  margin-top: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+/* Zones row fills the remaining viewport height */
+.hero-zones {
+  display: flex;
+  flex: 1;
+  position: relative;
+  min-height: 65vh;
 }
 .hero-zone {
   position: relative;
-  min-height: 100vh;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 3rem 2.5rem;
+  padding: 2.5rem 2rem;
   overflow: hidden;
   cursor: pointer;
   transition: flex 0.6s cubic-bezier(0.4,0,0.2,1);
-  flex: 1;
 }
 .hero-zone:hover { flex: 1.6; }
 .hero-zone-bg {
@@ -343,25 +371,6 @@ p  { font-size: 1rem; line-height: 1.75; color: var(--text-muted); }
   height: 40%;
   transform: translateY(-50%);
   background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent);
-}
-.hero-top {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  z-index: 10;
-  padding: 160px 4rem 0;
-  pointer-events: none;
-  text-align: center;
-}
-.hero-top h1 {
-  font-size: clamp(3rem, 6vw, 6rem);
-  font-weight: 900;
-  text-shadow: 0 4px 40px rgba(0,0,0,0.5);
-  line-height: 1.1;
-}
-.hero-top p {
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.7);
-  margin-top: 1rem;
 }
 .hero-scroll {
   position: absolute;
@@ -1112,13 +1121,12 @@ footer {
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .hamburger { display: flex; }
-  #hero { grid-template-columns: 1fr; grid-template-rows: repeat(3, 50vh); min-height: auto; }
-  .hero-top { padding: 100px 2rem 0; position: relative; display: block; padding-bottom: 2rem; }
-  .hero-zone { min-height: 50vh; }
-  .hero-zone:hover { flex: 1; }
+  #hero { flex-direction: column; min-height: auto; }
+  .hero-top { padding: 100px 1.5rem 2rem; }
+  .hero-zones { flex-direction: column; min-height: auto; }
+  .hero-zone { min-height: 50vh; flex: 1 !important; }
   .hero-zone p { opacity: 1; transform: none; }
   .hero-zone .hero-zone-cta { opacity: 1; transform: none; }
-  .hero-top-wrap { display: flex; flex-direction: column; }
   .marketing-grid { grid-template-columns: 1fr; }
   .webdev-grid { grid-template-columns: 1fr; }
   .noise-clarity-inner { grid-template-columns: 1fr; }

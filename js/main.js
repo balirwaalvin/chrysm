@@ -53,17 +53,20 @@
 
   /* ─── Hero Zones: Parallax on mousemove ─── */
   const heroZones = document.querySelectorAll('.hero-zone');
-  document.getElementById('hero').addEventListener('mousemove', (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    heroZones.forEach(zone => {
-      const bg = zone.querySelector('.hero-zone-bg');
-      if (bg) {
-        bg.style.transform = `scale(1.06) translate(${x * 12}px, ${y * 8}px)`;
-      }
+  const heroZonesEl = document.querySelector('.hero-zones');
+  if (heroZonesEl) {
+    heroZonesEl.addEventListener('mousemove', (e) => {
+      const rect = heroZonesEl.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      heroZones.forEach(zone => {
+        const bg = zone.querySelector('.hero-zone-bg');
+        if (bg) {
+          bg.style.transform = `scale(1.06) translate(${x * 12}px, ${y * 8}px)`;
+        }
+      });
     });
-  });
+  }
 
   /* ─── Magnetic Buttons ─── */
   document.querySelectorAll('.btn').forEach(btn => {
